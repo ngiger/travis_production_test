@@ -1,3 +1,4 @@
+\set ON_ERROR_STOP true
 select version();
 show server_version;
 \dt
