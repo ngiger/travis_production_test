@@ -4,17 +4,6 @@ dist: xenial # we need xenial to have mysql 5.7
 
 language: generic
 
-  
-notifications:
-  email:
-  - niklaus.giger@member.fsf.org
-
-jdk: openjdk8 # oraclejdk8 is no longer supported by travis-ci
-
-cache:
-  directories:
-  - $HOME/.m2
-
 addons:
   postgresql: "9.5"
 
@@ -32,6 +21,6 @@ before_install:
   - psql --version
   - psql -c "show server_version;"
   - psql -c "select version()";
-  - /usr/bin/mysqldump --version
+  - psql -f postgres.sql
 
 # Some Changes
