@@ -23,6 +23,6 @@ before_install:
   - psql -c "select version()";
   - psql -c "create user elexisTest with UNENCRYPTED password 'elexisTest';" -U postgres
   - psql -c "create database unittests;" -U postgres
-  - psql --user=elexistest --host=localhost  unittests -f postgres.sql
+  - psql --user=elexistest --host=localhost  unittests -f postgres.sql --echo-all
 
 # Some Changes
