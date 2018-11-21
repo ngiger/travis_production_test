@@ -1,6 +1,6 @@
 ---
 #JUst some comment
-dist: trusty # we need xenial to have mysql 5.7
+dist: xenial # we need xenial to have mysql 5.7
 
 language: generic
 
@@ -17,9 +17,10 @@ env:
 before_install:
   - mysql --version
   - mysql -e 'SHOW VARIABLES LIKE "%case%";'
-  - echo 'lower_case_tablenames = 1' >> ~travis/.my.cnf
-  - echo '# Some comment' >> ~travis/.my.cnf
-  - cat  ~travis/.my.cnf
+  - find . -name my.cnf
+  - echo 'lower_case_tablenames = 1' | sudo tee --append /etc/my.cnf
+  - echo '# Some comment'  | sudo tee --append /etc/my.cnf
+  - cat  /etc/my.cnf
   - sudo service mysql restart
   - mysql --version
   - mysql -e 'SHOW VARIABLES LIKE "%case%";'
