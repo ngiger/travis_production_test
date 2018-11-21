@@ -20,9 +20,10 @@ env:
 before_install:
   - mysql --version
   - mysql -e 'SHOW VARIABLES LIKE "%case%";'
-  - find . -name my.cnf
-  - echo "[mysqld]" > $HOME/.my.cnf
+  - whoami
+  - echo "[mysqld]" >> ~travis/.my.cnf
   - echo "lower-case-table-names = 1" >> $HOME/.my.cnf
+  - cat ~travis/.my.cnf
   - mysql --version
   - mysql -e 'SHOW VARIABLES LIKE "%case%";'
   - mysql -e 'SHOW VARIABLES LIKE "%version%";'
