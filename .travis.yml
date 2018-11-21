@@ -1,6 +1,6 @@
 ---
 #JUst some comment
-dist: xenial # we need xenial to have mysql 5.7
+dist: trusty # we need xenial to have mysql 5.7
 
 language: generic
 
