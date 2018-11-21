@@ -4,6 +4,9 @@ dist: xenial # we need xenial to have mysql 5.7
 
 language: generic
 
+notifications:
+  email: false
+
 addons:
   postgresql: "9.6"
 
@@ -18,10 +21,8 @@ before_install:
   - mysql --version
   - mysql -e 'SHOW VARIABLES LIKE "%case%";'
   - find . -name my.cnf
-  - echo 'lower_case_tablenames = 1' | sudo tee --append /etc/my.cnf
-  - echo '# Some comment'  | sudo tee --append /etc/my.cnf
-  - cat  /etc/my.cnf
-  - sudo service mysql restart
+  - echo "[mysqld]" > $HOME/.my.cnf
+  - echo "lower-case-table-names = 1" >> $HOME/.my.cnf
   - mysql --version
   - mysql -e 'SHOW VARIABLES LIKE "%case%";'
   - mysql -e 'SHOW VARIABLES LIKE "%version%";'
