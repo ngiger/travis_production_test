@@ -18,6 +18,7 @@ before_install:
   - mysql --version
   - mysql -e 'SHOW VARIABLES LIKE "%case%";'
   - echo 'lower_case_tablenames = 1' >> ~travis/.my.cnf
+  - echo '# Some comment' >> ~travis/.my.cnf
   - cat  ~travis/.my.cnf
   - sudo service mysql restart
   - mysql --version
