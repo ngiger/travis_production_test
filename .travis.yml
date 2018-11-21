@@ -20,11 +20,16 @@ env:
 before_install:
   - mysql --version
   - mysql -e 'SHOW VARIABLES LIKE "%case%";'
+  - sudo find /etc -name "*.cnf"
+  - sudo cat /etc/mysql/my.cnf
   - whoami
-  - echo "[mysqld]" >> ~travis/.my.cnf
-  - echo "lower-case-table-names = 1" >> $HOME/.my.cnf
-  - cat ~travis/.my.cnf
+  - echo "[mysqld]" | sudo tee /etc/mysql/mysql.conf.d/lowercase.cnf
+  # - echo "lower-case-table-names = 1" >> $HOME/.my.cnf
+  - echo "lower_case_table_names = 1" | sudo tee --append /etc/mysql/mysql.conf.d/lowercase.cnf
+  - cat /etc/mysql/mysql.conf.d/lowercase.cnf
   - mysql --version
+  - mysql -e 'SHOW VARIABLES LIKE "%case%";'
+  - sudo systemctl restart mysql
   - mysql -e 'SHOW VARIABLES LIKE "%case%";'
   - mysql -e 'SHOW VARIABLES LIKE "%version%";'
   - mysql -e 'CREATE DATABASE unittests;'
