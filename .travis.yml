@@ -16,7 +16,15 @@ env:
 
 before_install:
   - mysql --version
+  - mysql -e 'SHOW VARIABLES LIKE "%case%";'
+  - echo 'lower-case-tablenames = 1' >> ~travis/.my.cnf
+  - cat  ~travis/.my.cnf
+  - sudo service mysql restart
+  - mysql --version
+  - mysql -e 'SHOW VARIABLES LIKE "%case%";'
   - mysql -e 'SHOW VARIABLES LIKE "%version%";'
+  - mysql -e 'CREATE DATABASE unittests;'
+  - mysql -e "grant all on unittests.* to elexisTest@localhost identified by 'elexisTest';"
   - grep -w port /etc/postgresql/*/main/postgresql.conf
   - psql --version
   - psql -c "show server_version;"
